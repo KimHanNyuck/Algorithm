@@ -1,51 +1,37 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class Longest_Node {
 	public int solution(int n, int[][] edge) {
         int answer = 0;
-        Map<Integer, ArrayList> map = new HashMap<Integer, ArrayList>();
-        Map<Integer, ArrayList> level = new HashMap<Integer, ArrayList>();
-        for(int i = 0 ; i < edge.length; i++) {
-        	if(edge[i][0] > edge[i][1]) {
-        		if(!map.containsKey(edge[i][1])) {
-        			ArrayList list = new ArrayList();
-        			list.add(edge[i][0]);
-        			map.put(edge[i][1],list);
-        		} else {
-        			map.get(edge[i][1]).add(edge[i][0]);
-        		
-        		}
-        	} else {
-        		if(!map.containsKey(edge[i][0])) {
-        			ArrayList list = new ArrayList();
-        			list.add(edge[i][1]);
-        			map.put(edge[i][0],list);
-        		} else {
-        			map.get(edge[i][0]).add(edge[i][1]);
-        		}
-        	}
+        boolean[] visit = new boolean[n+1];
+        boolean[][] connected = new boolean[n+1][n+1];
+        for(int i = 0; i < edge.length; i++) {
+            connected[edge[i][0]][edge[i][1]] = connected[edge[i][1]][edge[i][0]] = true;
         }
-        Iterator<Integer> it = map.keySet().iterator();
-        int stairs = 1;
-        while(it.hasNext()) {
-        	for(int i = 0 ; i < map.get(it.next()).size(); i++){
-        		if(!level.containsKey(stairs)) {
-        			ArrayList llist = new ArrayList<>();
-            		llist.add(map.get(it.next()).get(i));
-            		level.put(stairs, llist);
-        		} else {
-        			level.get(stairs).add(map.get(it.next()).get(i));
-        		}
-        		
-        	}
-        	stairs++;
+        Queue<Integer> queue = new LinkedList<>();
+        List<Integer> nextNodes = new ArrayList<>();
+        queue.add(1);
+        visit[0] = visit[1] = true;
+        while(true) {
+            answer = queue.size();
+            while(!queue.isEmpty()) {
+                int node = queue.poll();
+                for(int j = 1; j <= n; j++) {
+                    if(!visit[j] && connected[node][j]) {
+                        nextNodes.add(j);
+                        visit[j] = true;
+                    }
+                }
+            }
+            if(nextNodes.isEmpty()) {
+                break;
+            }
+            queue.addAll(nextNodes);
+            nextNodes.clear();
         }
-        answer = level.get(level.size()).size();
-        
-        
         return answer;
     }
 	public static void main(String[] args) {
