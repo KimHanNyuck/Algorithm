@@ -18,20 +18,23 @@ public class Phone_Book {
 		} else {
 			if(j != phone_book.length-1) {
 				j++;
-				tf(phone_book, i , j);
+				return tf(phone_book, i , j);
 			} else {
 				i++;
 				j = i+1;
-				tf(phone_book, i , j);
 				if(i == phone_book.length-1) {
 					return false;
+				} else {
+					return tf(phone_book, i , j);
 				}
+				
 			}
 		}
-		return false;
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Phone_Book pb = new Phone_Book();
+		pb.solution(new String[] {"123", "456", "789"});
 
 	}
 
