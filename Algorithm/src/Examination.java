@@ -1,7 +1,5 @@
 import java.util.*;
 
-import com.sun.tools.javac.util.ArrayUtils;
-
 public class Examination {
 	public int[] solution(int[] answers) {
         int[] answer = {};
