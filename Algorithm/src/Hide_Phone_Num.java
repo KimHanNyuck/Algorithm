@@ -10,7 +10,7 @@ public class Hide_Phone_Num {
 			}
 			s[i] = String.valueOf(c[i]);
 		}
-		return Arrays.stream(s).reduce((a,b) -> a+b).orElse(other);
+		return Arrays.stream(s).reduce((a,b) -> a+b).orElse("");
 	}
 
 	public static void main(String[] args) {
