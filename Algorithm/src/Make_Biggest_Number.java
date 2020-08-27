@@ -4,7 +4,6 @@ public class Make_Biggest_Number {
 	public String solution(String number, int k) {
 		int idx = 0;
 		StringBuilder answer = new StringBuilder();
-
 		if (number.charAt(0) == '0') {
 			return "0";
 		}
