@@ -31,7 +31,6 @@ public class Function_Develop {
         	dif = q.size();
         	if(length != dif) {
         		list.add(length-dif);
-        		System.out.println(length-dif);
         		length = dif;
         	}
         }
