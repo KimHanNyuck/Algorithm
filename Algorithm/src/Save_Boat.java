@@ -1,12 +1,17 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Save_Boat {
 	public int solution(int[] people, int limit) {
         int answer = 0;
         Arrays.sort(people);
-        Queue<Integer> q = new LinkedList<Integer>();
+        List<Integer> q = new ArrayList<Integer>();
+        int sum = 0;
         for(int i = 0 ; i < people.length; i++) {
         	System.out.println(people[i]);
         	while(people[i]<limit) {
@@ -17,7 +22,7 @@ public class Save_Boat {
         		q.add(people[i]);
         		System.out.println("Ãß°¡");
         	} else {
-        		int sum = q.stream().reduce(0,Integer::sum);
+        		sum = IntStream.of(people).sum();
         		System.out.println(sum);
         		if(sum + people[i] > limit) {
         			answer ++;
